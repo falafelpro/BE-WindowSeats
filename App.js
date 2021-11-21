@@ -25,7 +25,7 @@ app.use(cors());
 
 // Routes
 //app.use("/assets", express.static(path.join(__dirname, "assets")));
-app.use("/api/users", userRoutes);
+app.use("/api", userRoutes);
 
 app.use((req, res, next) =>
   res.status(404).json({ message: "Path not found" })
