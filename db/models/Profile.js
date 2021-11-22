@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const ProfileSchema = mongoose.Schema({
   image: {
     type: String,
-    required: true,
   },
   description: {
     type: String,
