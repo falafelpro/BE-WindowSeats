@@ -16,18 +16,15 @@ const createToken = (user) => {
 
 exports.signup = async (req, res, next) => {
   try {
-    const saltrounds = 10;
-    const hashedPass = await bcrypt.hash(req.body.password, saltrounds);
+    const saltRounds = 10;
+    const hashedPass = await bcrypt.hash(req.body.password, saltRounds);
     req.body.password = hashedPass;
     const newUser = await User.create(req.body);
     await Profile.create({
       owner: newUser._id,
       image: "",
-      //you can add unique slug. but make sure to uncoment the profile schema
     });
     const token = createToken(newUser);
-
-    console.log(token);
 
     res.status(201).json({ token });
   } catch (error) {
@@ -39,6 +36,4 @@ exports.signin = async (req, res, next) => {
   const token = await createToken(req.user);
 
   console.log(token);
-
-  res.json({ token });
 };

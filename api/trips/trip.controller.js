@@ -57,3 +57,18 @@ exports.createTrip = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.deleteTrip = async (req, res, next) => {
+  try {
+    const { tripId } = req.params;
+    const foundTrip = await Trip.findById(tripId);
+    if (foundTrip) {
+      await foundTrip.remove();
+      res.status(204).end();
+    } else {
+      res.status(404).json({ message: "Trip not found" });
+    }
+  } catch (error) {
+    next(error);
+  }
+};

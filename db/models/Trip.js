@@ -6,9 +6,6 @@ const TripSchema = mongoose.Schema({
   description: {
     type: String,
   },
-  lengthInDays: {
-    type: Number,
-  },
   departure: {
     type: String,
   },
@@ -16,17 +13,16 @@ const TripSchema = mongoose.Schema({
     type: String,
   },
   purpose: {
-    type: String,
+    enum: ["Bussniss", "Leisure", "7dag", null],
   },
   images: {
     type: [String],
   },
-  highlight: {
+  highlights: {
     type: [String],
   },
   rating: { type: Number },
-  startDate: { type: Date },
-  endDate: { type: Date },
+  season: String,
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",

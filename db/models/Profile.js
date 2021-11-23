@@ -8,7 +8,6 @@ const ProfileSchema = mongoose.Schema({
   description: {
     type: String,
   },
-  //slug: String,
   trips: {
     type: [mongoose.Schema.Types.ObjectId],
     ref: "Trip",
@@ -18,6 +17,5 @@ const ProfileSchema = mongoose.Schema({
     ref: "User",
   },
 });
-//ProfileSchema.plugin(mongooseSlugPlugin, { tmpl: "<%=name%>" });
 
 module.exports = mongoose.model("Profile", ProfileSchema);
