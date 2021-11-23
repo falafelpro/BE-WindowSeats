@@ -32,10 +32,10 @@ exports.updateProfile = async (req, res, next) => {
     req.body.image = `${req.protocol}://${req.get("host")}/${req.file.path}`;
   }
   try {
-    const foundProfile = await Profile.findByPk(profileId);
+    const foundProfile = await Profile.findById(profileId);
     if (foundProfile) {
       //deletes old profile picture from assets
-      fs.unlinkSync(foundProfile.image);
+      if (fs.existsSync(foundTrip.image)) fs.unlinkSync(foundTrip.image);
       await foundProfile.update(req.body);
       return res.status(204).end();
     } else {
