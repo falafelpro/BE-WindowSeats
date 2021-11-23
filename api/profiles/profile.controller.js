@@ -3,6 +3,7 @@ const fs = require("fs");
 
 exports.fetchProfiles = async (req, res) => {
   try {
+    // REVIEW: This is an overkill, to populate the trips here. IT will cause you issues when you're updating a trip
     const foundProfiles = await Profile.find()
       .populate("trips")
       .populate("owner");
@@ -29,6 +30,7 @@ exports.fetchProfileById = async (req, res, next) => {
 exports.updateProfile = async (req, res, next) => {
   const { profileId } = req.params;
   if (req.file) {
+    // REVIEW: If you're using a phone and not the simulator this will cause you issues
     req.body.image = `${req.protocol}://${req.get("host")}/${req.file.path}`;
   }
   try {

@@ -19,6 +19,8 @@ const {
 //   }
 // });
 
+// REVIEW: You dont need the profileId, you have the user's ID from the token
+
 router.get("/", fetchProfiles);
 router.get("/:profileId", fetchProfileById);
 router.put(

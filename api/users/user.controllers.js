@@ -16,6 +16,7 @@ const createToken = (user) => {
 
 exports.signup = async (req, res, next) => {
   try {
+    // REVIEW: saltRounds not saltrounds
     const saltrounds = 10;
     const hashedPass = await bcrypt.hash(req.body.password, saltrounds);
     req.body.password = hashedPass;
@@ -23,10 +24,11 @@ exports.signup = async (req, res, next) => {
     await Profile.create({
       owner: newUser._id,
       image: "",
+      // REVIEW: Why do you need a slug for a mobile application?
       //you can add unique slug. but make sure to uncoment the profile schema
     });
     const token = createToken(newUser);
-
+    // REVIEW: remove console log if you're done with it
     console.log(token);
 
     res.status(201).json({ token });
@@ -37,6 +39,7 @@ exports.signup = async (req, res, next) => {
 
 exports.signin = async (req, res, next) => {
   const token = await createToken(req.user);
+  // REVIEW: remove console log if you're done with it
 
   console.log(token);
 

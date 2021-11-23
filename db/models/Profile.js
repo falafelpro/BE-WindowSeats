@@ -9,10 +9,12 @@ const ProfileSchema = mongoose.Schema({
     type: String,
   },
   //slug: String,
+  // REVIEW: Why do you need the list of trips here? Every trip has its owner ID, you can filter by the userID
   trips: {
     type: [mongoose.Schema.Types.ObjectId],
     ref: "Trip",
   },
+
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",

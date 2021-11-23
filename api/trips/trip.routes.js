@@ -5,6 +5,7 @@ const router = express.Router();
 const { fetchTrips, updateTrip, createTrip } = require("./trip.controller");
 
 router.get("/", fetchTrips);
+// REVIEW: You don't pass the profile ID, you get the user ID from the token
 router.put(
   "/:profileId",
   passport.authenticate("jwt", { session: false }),
