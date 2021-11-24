@@ -34,6 +34,6 @@ exports.signup = async (req, res, next) => {
 
 exports.signin = async (req, res, next) => {
   const token = await createToken(req.user);
-
+  res.status(200).json(token);
   console.log(token);
 };

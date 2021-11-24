@@ -46,7 +46,7 @@ exports.updateProfile = async (req, res, next) => {
     //   return res.status(404).json({ message: "Profile not found" });
     // }
     Profile.findOneAndUpdate(
-      profileId,
+      { "owner._id": req.payload.id },
       req.body,
       { upsert: true },
       function (err, doc) {

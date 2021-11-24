@@ -26,7 +26,6 @@ exports.updateTrip = async (req, res, next) => {
       // foundTrip.image?.forEach((image) => {
       //   if (fs.existsSync(foundTrip.image)) fs.unlinkSync(foundTrip.image);
       // });
-
       await foundTrip.update(req.body);
       return res.status(204).end();
     } else {
