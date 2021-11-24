@@ -28,8 +28,6 @@ exports.fetchProfileById = async (req, res, next) => {
 
 exports.updateProfile = async (req, res, next) => {
   const { profileId } = req.params;
-
-  console.log(profileId);
   if (req.file) {
     req.body.image = `${req.protocol}://${req.get("host")}/${req.file.path}`;
   }
@@ -45,15 +43,24 @@ exports.updateProfile = async (req, res, next) => {
     // } else {
     //   return res.status(404).json({ message: "Profile not found" });
     // }
-    Profile.findOneAndUpdate(
-      { "owner._id": req.payload.id },
-      req.body,
-      { upsert: true },
-      function (err, doc) {
-        if (err) return res.send(500, { error: err });
-        return res.send("Succesfully saved.");
-      }
-    );
+    // Profile.findOneAndUpdate(
+    //   { "owner._id": req.payload.id },
+    //   req.body,
+    //   { upsert: true },
+    //   function (err, doc) {
+    //     if (err) return res.send(500, { error: err });
+    //     return res.send("Succesfully saved.");
+    //   }
+    // );
+    const foundProfile = await Profile.findById(profileId);
+    if (foundProfile) {
+      //deletes old profile picture from assets
+      if (fs.existsSync(foundTrip.image)) fs.unlinkSync(foundTrip.image);
+      await foundProfile.update(req.body);
+      return res.status(204).end();
+    } else {
+      return res.status(404).json({ message: "Profile not found" });
+    }
   } catch (error) {
     next(error);
   }
