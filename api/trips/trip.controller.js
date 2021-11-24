@@ -38,7 +38,7 @@ exports.updateTrip = async (req, res, next) => {
 };
 
 exports.createTrip = async (req, res, next) => {
-  console.log(req.file);
+  // console.log(req.file);
   //console.log(req.body);
   if (req.files) {
     const test = [];
@@ -46,7 +46,7 @@ exports.createTrip = async (req, res, next) => {
       test.push(`${req.protocol}://${req.get("host")}/${file.path}`);
     });
     req.body.images = test;
-    console.log("second one:", req.body);
+    // console.log("second one:", req.body);
   }
   try {
     console.log(req.body);
